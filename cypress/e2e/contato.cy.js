@@ -1,3 +1,5 @@
+///<reference types="cypress" />
+
 describe('Funcionalidade de Contato', () => {
 
 
@@ -55,5 +57,5 @@ describe('Funcionalidade de Contato', () => {
     // Resultado esperado
     cy.get('#alert-container').should('contain', 'Por favor, escreva sua Mensagem.')
   });
-  
+
 })
