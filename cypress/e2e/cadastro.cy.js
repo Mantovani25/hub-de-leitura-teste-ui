@@ -38,4 +38,20 @@ describe('Funcionalidade de Cadastro', () => {
 
     });
 
+
+    it('Cadastrar usuário com comando customizado', () => {
+        let email = `teste${Date.now()}@teste.com`
+        let nome = faker.person.fullName({sex: 'male'})
+        cy.preencherCadastro(
+            nome,
+            email,
+            '1234567890',
+            'senha123',
+            'senha123'
+        )
+        cy.url().should('include', 'dashboard')
+
+
+    });
+
 })
