@@ -1,11 +1,12 @@
 ///<reference types="cypress" />
 import { faker } from '@faker-js/faker';
+import cadastroPage from '../support/pages/cadastro-page';
 
 describe('Funcionalidade de Cadastro', () => {
 
 
     beforeEach(() => {
-        cy.visit('register.html')
+        cadastroPage.visitarPaginaCadastro()
     })
 
     it('Cadastrar usuário com sucesso usando função', () => {
@@ -53,5 +54,19 @@ describe('Funcionalidade de Cadastro', () => {
 
 
     });
+
+
+    it('Cadastrar usuário usando page objects', () => {
+        let email = `teste${Date.now()}@teste.com`
+        cadastroPage.preencherCadastro('Lucas Lopes', email, '1234567890', 'senha123', 'senha123')
+        cy.url().should('include', 'dashboard')
+    })
+
+
+        it.only('Cadastro sem preencher nome', () => {
+        let email = `teste${Date.now()}@teste.com`
+        cadastroPage.preencherCadastro('', email, '1234567890', 'senha123', 'senha123')
+        cy.get(':nth-child(1) > .invalid-feedback').should('contain', 'Nome deve ter pelo menos 2 caracteres')
+    })
 
 })

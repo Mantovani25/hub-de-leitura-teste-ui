@@ -19,5 +19,22 @@ describe('Funcionalidade busca no catálogo', () => {
         cy.get('.card-title > .text-dark').should('contain', catalogoLivros[2].livro)
     });
 
+    it('Fazer busca de um livro por fixture', () => {
+        cy.fixture('livros').then((cat) => {
+            cy.get('#search-input').type(cat[2].livro)
+            cy.get('.card-title > .text-dark').should('contain', cat[2].livro)
+        })
+    });
 
-})
+    it.only('Fazer busca de um livro por fixture', () => {
+        cy.fixture('livros').then((cat) => {
+            cat.forEach((item) => {
+                cy.get('#search-input').clear().type(item.livro)
+                cy.get('.card-title > .text-dark').should('contain', item.livro)
+                
+            })
+        })
+    });
+
+
+});
